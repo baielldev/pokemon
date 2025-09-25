@@ -1,0 +1,52 @@
+.header {
+  padding-block: 10px;
+  border-bottom: 1px solid #00000087;
+  .content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .logo {
+      width: 100%;
+      max-width: 200px;
+      height: 70px;
+      object-fit: cover;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      a {
+        color: #000;
+        font-size: 20px;
+      }
+      .profile {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+      }
+    }
+  }
+  .menuModal {
+    position: relative;
+    .menuContent {
+      position: absolute;
+      top: 15px;
+      right: 0;
+      background: white;
+      border: 1px solid #00000087;
+      border-radius: 8px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      z-index: 10;
+      p {
+        cursor: pointer;
+        color: #00000087;
+        text-decoration: underline;
+      }
+    }
+  }
+}

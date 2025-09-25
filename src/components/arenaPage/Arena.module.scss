@@ -1,0 +1,109 @@
+.arena {
+  padding: 60px 0;
+  background: linear-gradient(135deg, #f9fafc, #eef2f7);
+  text-align: center;
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+.choose {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 40px;
+
+  select {
+    padding: 12px 16px;
+    border: 2px solid #d0d7e2;
+    border-radius: 12px;
+    background: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s ease;
+
+    &:hover {
+      border-color: #4f46e5;
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.15);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: #4f46e5;
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.25);
+    }
+  }
+}
+
+.vs {
+  font-size: 22px;
+  font-weight: bold;
+  color: #4f46e5;
+}
+
+.battlefield {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  margin-bottom: 30px;
+}
+
+.pokemonCard {
+  background: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  width: 180px;
+  text-align: center;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  img {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+    margin-bottom: 12px;
+  }
+
+  h3 {
+    font-size: 18px;
+    text-transform: capitalize;
+  }
+}
+
+.fightBtn {
+  padding: 14px 28px;
+  font-size: 18px;
+  font-weight: bold;
+  background: #4f46e5;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s ease;
+
+  &:hover:not(:disabled) {
+    background: #3730a3;
+  }
+
+  &:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+  }
+}
+
+.result {
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #10b981;
+}
