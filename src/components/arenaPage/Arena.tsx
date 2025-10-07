@@ -3,10 +3,21 @@ import React, { useState } from "react";
 import scss from "./Arena.module.scss";
 import { useDataStore } from "@/store/useDataStore";
 
+type PokemonStat = {
+  base_stat: number;
+  stat: { name: string };
+};
+
+type Pokemon = {
+  name: string;
+  stats: PokemonStat[];
+  sprites: { front_default: string };
+};
+
 const Arena = () => {
   const { items } = useDataStore();
-  const [leftPokemon, setLeftPokemon] = useState<any | null>(null);
-  const [rightPokemon, setRightPokemon] = useState<any | null>(null);
+  const [leftPokemon, setLeftPokemon] = useState<Pokemon | null>(null);
+  const [rightPokemon, setRightPokemon] = useState<Pokemon | null>(null);
   const [winner, setWinner] = useState<string | null>(null);
 
   const handleFight = () => {
@@ -15,20 +26,17 @@ const Arena = () => {
     const stats1 = leftPokemon.stats;
     const stats2 = rightPokemon.stats;
 
-    const result = stats1.reduce(
-      (acc, el, idx) => {
+    const result = stats1.reduce<{ left: number; right: number }>(
+      (acc, _, idx) => {
         if (stats1[idx].base_stat > stats2[idx].base_stat) {
           acc.left++;
         } else {
           acc.right++;
         }
-
-        console.log(acc);
         return acc;
       },
       { left: 0, right: 0 }
     );
-    console.log(result);
 
     if (result.left > result.right) {
       setWinner(leftPokemon.name);
@@ -47,11 +55,14 @@ const Arena = () => {
         <div className={scss.choose}>
           <select
             onChange={(e) =>
-              setLeftPokemon(items.find((item) => item.name === e.target.value))
+              setLeftPokemon(
+                items.find((item: Pokemon) => item.name === e.target.value) ||
+                  null
+              )
             }
           >
             <option>Выберите покемона p1</option>
-            {items.map((item, index) => (
+            {items.map((item: Pokemon, index: number) => (
               <option key={index}>{item.name}</option>
             ))}
           </select>
@@ -61,12 +72,13 @@ const Arena = () => {
           <select
             onChange={(e) =>
               setRightPokemon(
-                items.find((item) => item.name === e.target.value)
+                items.find((item: Pokemon) => item.name === e.target.value) ||
+                  null
               )
             }
           >
             <option>Выберите покемона p2</option>
-            {items.map((item, index) => (
+            {items.map((item: Pokemon, index: number) => (
               <option key={index}>{item.name}</option>
             ))}
           </select>
