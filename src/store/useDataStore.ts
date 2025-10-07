@@ -1,10 +1,22 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import axios from "axios";
+
+interface Pokemon {
+  name: string;
+  sprites: {
+    front_default: string;
+  };
+  stats: {
+    base_stat: number;
+    stat: { name: string };
+  }[];
+}
 
 interface DataState {
-  items: any[];
+  items: Pokemon[];
   loading: boolean;
+  addPokemonToCollection: (pokemon: Pokemon) => void;
+  removePokemonFromCollection: (name: string) => void;
 }
 
 export const useDataStore = create<DataState>()(
@@ -12,18 +24,21 @@ export const useDataStore = create<DataState>()(
     (set) => ({
       items: [],
       loading: false,
+
       addPokemonToCollection: (pokemon) => {
         set({ loading: true });
-        set((state) => ({ items: [...state.items, pokemon], loading: false }));
+        set((state) => ({
+          items: [...state.items, pokemon],
+          loading: false,
+        }));
       },
+
       removePokemonFromCollection: (name) => {
         set((state) => ({
-          items: state.items.filter((item) => name !== item.name),
+          items: state.items.filter((item) => item.name !== name),
         }));
       },
     }),
-    {
-      name: "collection",
-    }
+    { name: "collection" }
   )
 );
